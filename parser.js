@@ -5,13 +5,17 @@ returns a JSON string containing information about its contents.
 function parseMessage(message) {
 	var words = message.split(" "); //split does unnecessary copy, but let's assume fairly short messages
 
-	result = {};
+	metadata = {};
 	for (word of words) {
 		// TODO: parse for mentions, emoticons, and links as we go
 		// TODO: make the code more modular/extensible to parse additional types of words
 		if (word.length > 0) {
-			if (word[0] === '@') { //assumes validation of users is done by another module
-				//TODO: add to mentions
+			if (word[0] === '@') { 
+				var user = word.slice(1) //assumes validation of users is done by another module
+				if (metadata.hasOwnProperty('mentions'))
+					metadata.mentions.push(user);
+				else 
+					metadata.mentions = [user];
 			}
 			if (word[0] === '(' && word[word.length - 1] === ')') {
 				//TODO: add to emoticons
@@ -22,7 +26,7 @@ function parseMessage(message) {
 			}
 		}
 	}
-	return JSON.stringify(result); 
+	return JSON.stringify(metadata); 
 }
 
 
