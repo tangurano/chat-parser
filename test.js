@@ -7,6 +7,14 @@ var mentions_json = {
   ]
 }
 
+var three_mentions_json = {
+  "mentions": [
+    "matt",
+    "steve",
+    "joe"
+  ]
+}
+
 var emoticons_json = {
   "emoticons": [
     "megusta",
@@ -45,6 +53,17 @@ var mixed_json = {
   ]
 }
 
+var no_space_json = {
+  "mentions": [
+    "matt",
+    "steve",
+    "joe"
+  ],
+  "emoticons": [
+    "panic",
+    "sadface"
+  ]
+}
 
 // mapping input msgs to expected outputs
 var test_cases = {
@@ -61,6 +80,8 @@ var test_cases = {
 
   "(111222333444555)": max_emoticon_json,
 
+  "@matt/@steve,@joe": three_mentions_json,
+
 	// common cases
 	"this is a plaintext message": {},
 
@@ -71,6 +92,8 @@ var test_cases = {
 	"Olympics are starting soon; http://www.nbcolympics.com": links_json,
 
 	"@bob @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016": mixed_json,
+
+  "this is not good(panic)...@matt/@steve,@joe, can anyone help?(sadface)": no_space_json,
 
 	// TODO: test mixing multiple of each type
 }
