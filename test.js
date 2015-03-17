@@ -40,11 +40,38 @@ var no_space_json = {
   ]
 }
 
-var links_json = {
+var link_json = {
   "links": [
     {
       "url": "http://www.nbcolympics.com",
       "title": "NBC Olympics | 2014 NBC Olympics in Sochi Russia"
+    }
+  ]
+}
+
+var link_json = {
+  "links": [
+    {
+      "url": "http://www.wikipedia.org",
+      "title": "Wikipedia"
+    }
+  ]
+}
+
+var https_link_json = {
+  "links": [
+    {
+      "url": "https://google.com",
+      "title": "Google"
+    }
+  ]
+}
+
+var bad_link_json = {
+  "links": [
+    {
+      "url": "http://bad_link",
+      "title": null
     }
   ]
 }
@@ -91,7 +118,11 @@ var test_cases = {
 	
   "this is not good(panic)...@matt/@steve,@joe, can anyone help?(sadface)": no_space_json,
 
-	"Olympics are starting soon; http://www.nbcolympics.com": links_json,
+  "http://www.wikipedia.org": link_json,
+
+	"This is secure: https://google.com": https_link_json,
+
+  "Bad link: http://www.nbcolympics.com": bad_link_json,
 
 	"@bob @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016": mixed_json,
 
@@ -99,17 +130,19 @@ var test_cases = {
 }
 
 // run test cases
+var test_num = 1;
 for (var msg in test_cases) {
   if (test_cases.hasOwnProperty(msg)) {
   	var expected = JSON.stringify(test_cases[msg]);
   	var actual = parser.parseMessage(msg);
 
   	if (expected === actual)
-  		console.log('PASS: ' + msg);
+  		console.log(test_num + ") PASS: " + msg);
   	else {
-  		console.log('FAIL: ' + msg);
-		  console.log("Expected: " + expected);
-   	 	console.log("Actual: " + actual);
+  		console.log(test_num + ") FAIL: " + msg);
+		  console.log("\tExpected: " + expected);
+   	 	console.log("\tActual: " + actual);
    	 }
   }
+  test_num += 1;
 }

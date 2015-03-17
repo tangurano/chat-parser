@@ -38,7 +38,7 @@ function parse_with_regex(message) {
 	var extractMention = function (match) {return match.slice(1);}
 	var emoticonsRegex = /\((\w){1,15}\)/g;
 	var extractEmoticon = function (match) {return match.slice(1, -1);}
-	// var linksRegex = /http:\/\//g;
+	// var linksRegex = /http(s)?:\/\/(\w)+/g;
 	// var extractLink = function (match) {return match.slice(1, -1);}
 
 	var mentions = get_matches(message, mentionsRegex, extractMention);
