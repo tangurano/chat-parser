@@ -17,7 +17,7 @@ module.exports = {
 					else
 						metadata.mentions = [user];
 				}
-				if (word[0] === '(' && word[word.length - 1] === ')' && word.length > 2) {
+				if (word[0] === '(' && word[word.length - 1] === ')' && word.length > 2 && word.length <= 17) {
 					var emoticon = word.slice(1, -1) //assumes validation of emoticons is done by another module
 					if (metadata.hasOwnProperty('emoticons'))
 						metadata.emoticons.push(emoticon);

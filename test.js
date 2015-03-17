@@ -14,6 +14,12 @@ var emoticons_json = {
   ]
 }
 
+var max_emoticon_json = {
+  "emoticons": [
+    "111222333444555",
+  ]
+}
+
 var links_json = {
   "links": [
     {
@@ -49,6 +55,12 @@ var test_cases = {
 
 	"() () ()": {},
 
+  "(this is not an emoticon)": {},
+
+  "(toolongforemoticon)": {},
+
+  "(111222333444555)": max_emoticon_json,
+
 	// common cases
 	"this is a plaintext message": {},
 
@@ -73,7 +85,7 @@ for (var msg in test_cases) {
   		console.log('PASS: ' + msg);
   	else {
   		console.log('FAIL: ' + msg);
-		console.log("Expected: " + expected);
+		  console.log("Expected: " + expected);
    	 	console.log("Actual: " + actual);
    	 }
   }
