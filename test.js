@@ -61,7 +61,7 @@ var link_json = {
 var https_link_json = {
   "links": [
     {
-      "url": "https://google.com",
+      "url": "HTTPS://google.com",
       "title": "Google"
     }
   ]
@@ -94,7 +94,8 @@ var three_links_json = {
     {
       // ambiguous case handled as one link
       "url": "http://www.wikipedia.org/https://google.com,http://go/tools",
-      "title": "Https://google.com,http://go/tools - Wikipedia, the free encyclopedia"
+      // Expect the server's 404 message instead of an uninformative null placeholder
+      "title": "Wikimedia page not found: http://en.wikipedia.org/https://google.com,http://go/tools"
     }
   ]
 }
@@ -110,7 +111,7 @@ var mixed_json = {
   "links": [
     {
       "url": "https://twitter.com/jdorfman/status/430511497475670016",
-      "title": "Twitter / jdorfman: nice @littlebigdetail from ..."
+      "title": "Justin Dorfman on Twitter: &quot;nice @littlebigdetail from @HipChat (shows hex colors when pasted in chat). http://t.co/7cI6Gjy5pq&quot;" //tested against Google Chrome
     }
   ]
 }
@@ -143,7 +144,7 @@ var test_cases = {
 
   "http://www.wikipedia.org": link_json,
 
-	"This is secure: https://google.com": https_link_json,
+	"This is secure: HTTPS://google.com": https_link_json,
 
   "Bad link: http://bad_link": bad_link_json,
 
@@ -153,7 +154,7 @@ var test_cases = {
 
 	"@bob @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016": mixed_json,
 
-	/* Test cases TODO:
+	/* Other ideas for test cases:
   Weird combinations/ambiguous cases:
   @(sadface) ?
   (@sadface)
@@ -165,6 +166,13 @@ var test_cases = {
   stress test mixing multiple of each type
 
   handling NON-ASCII characters?
+
+  URL tests:
+  [x] bad domains
+  [x] 404 pages
+  [ ] extremely large response body
+  [ ] response without a title
+  
   */
 }
 

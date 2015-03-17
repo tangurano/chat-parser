@@ -1,4 +1,4 @@
-// var request = require("request");
+var request = require("sync-request");
 
 // finds all strings matching the regex and applies extractData to each
 // returns an array containing all such strings
@@ -28,22 +28,28 @@ module.exports = {
 		var extractMention = function (match) {return match.slice(1);}
 		var emoticonsRegex = /\((\w){1,15}\)/g;
 		var extractEmoticon = function (match) {return match.slice(1, -1);}
-		var linksRegex = /http(s)?:\/\/(\w)+/g;
+		var linksRegex = /http(s)?:\/\/[^\s]*/ig; //assumes whitespace delimits links
 		var extractLink = function (match) {
 			var url = match;
 
 			var linkData = {};
 			linkData.url = url;
-			linkData.title = null;
+			linkData.title = null; // placeholder if no title can be retrieved at all (ie http://bad_link)
 
-			// request({
-			//   uri: url,
-			// }, function(error, response, body) {
-			//   console.log(error);
-			//   console.log(response);
-			//   console.log(body); //TODO: regex for title=""
-			// });
-			//alternatively, if we get a 404 page, we use that or possibly null?
+			try {
+				var res = request('GET', url); // throws error if bad url (ie bad_link)
+				var body = res.body.toString(); // all status codes treated identically
+				var titleRegex = /<title>(.*?)<\/title>/ig;	
+			
+				var matches = titleRegex.exec(body);
+				if (matches !== null) {
+					var title = matches[0].slice(7, -8); //always use first title tag
+					linkData.title = title;
+				}
+			} catch (err) {
+				// TODO: use a logging framework in production
+				// console.log("Error retrieving page title: " + err.message); 
+			}
 
 			return linkData;
 		}

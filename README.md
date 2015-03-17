@@ -6,7 +6,7 @@ Requirements:
 
 * node.js (v0.12.0, other versions untested)
 * The following npm modules:
-	* request
+	* sync-request (v2.53.0)
 
 Assumptions:
 
