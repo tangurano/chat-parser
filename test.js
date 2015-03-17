@@ -126,7 +126,19 @@ var test_cases = {
 
 	"@bob @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016": mixed_json,
 
-	// TODO: test mixing multiple of each type
+	/* Test cases TODO:
+  Weird combinations/ambiguous cases:
+  @(sadface) ?
+  (@sadface)
+  @http://google.com?
+
+  @(head nod)
+  @(head/nod)
+
+  stress test mixing multiple of each type
+
+  handling NON-ASCII characters?
+  */
 }
 
 // run test cases
