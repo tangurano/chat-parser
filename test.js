@@ -28,6 +28,18 @@ var max_emoticon_json = {
   ]
 }
 
+var no_space_json = {
+  "mentions": [
+    "matt",
+    "steve",
+    "joe"
+  ],
+  "emoticons": [
+    "panic",
+    "sadface"
+  ]
+}
+
 var links_json = {
   "links": [
     {
@@ -50,18 +62,6 @@ var mixed_json = {
       "url": "https://twitter.com/jdorfman/status/430511497475670016",
       "title": "Twitter / jdorfman: nice @littlebigdetail from ..."
     }
-  ]
-}
-
-var no_space_json = {
-  "mentions": [
-    "matt",
-    "steve",
-    "joe"
-  ],
-  "emoticons": [
-    "panic",
-    "sadface"
   ]
 }
 
@@ -89,11 +89,11 @@ var test_cases = {
 
 	"Good morning! (megusta) (coffee)" : emoticons_json,
 	
+  "this is not good(panic)...@matt/@steve,@joe, can anyone help?(sadface)": no_space_json,
+
 	"Olympics are starting soon; http://www.nbcolympics.com": links_json,
 
 	"@bob @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016": mixed_json,
-
-  "this is not good(panic)...@matt/@steve,@joe, can anyone help?(sadface)": no_space_json,
 
 	// TODO: test mixing multiple of each type
 }
