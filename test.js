@@ -76,6 +76,29 @@ var bad_link_json = {
   ]
 }
 
+var two_links_json = {
+  "links": [
+    {
+      "url": "http://www.wikipedia.org",
+      "title": "Wikipedia"
+    },
+    {
+      "url": "https://google.com",
+      "title": "Google"
+    }
+  ]
+}
+
+var three_links_json = {
+  "links": [
+    {
+      // ambiguous case handled as one link
+      "url": "http://www.wikipedia.org/https://google.com,http://go/tools",
+      "title": "Https://google.com,http://go/tools - Wikipedia, the free encyclopedia"
+    }
+  ]
+}
+
 var mixed_json = {
   "mentions": [
     "bob",
@@ -122,7 +145,11 @@ var test_cases = {
 
 	"This is secure: https://google.com": https_link_json,
 
-  "Bad link: http://www.nbcolympics.com": bad_link_json,
+  "Bad link: http://bad_link": bad_link_json,
+
+  "http://www.wikipedia.org https://google.com": two_links_json,
+
+  "http://www.wikipedia.org/https://google.com,http://go/tools": three_links_json,
 
 	"@bob @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016": mixed_json,
 
